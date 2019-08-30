@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import axios from 'axios'
+
+import Header from './Header'
 import {
     Jumbotron,
     Button,
@@ -23,67 +26,74 @@ class Profile extends Component{
 
 
   state = {
-    edit : false
+    edit : false,
+    profile: []
   }
 
 
-  renderEdit = () => {
+  onButtonClick = () => {
 
-    const{nama_lengkap, username, email, phone_number, id} = this.props.user
-    if(this.state.edit){
-      return(
-    
-                <div className = "container">
-                  <div className = "row">
-                    <div className = "col-sm-auto">
-                      <img src ="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" className = "avatar" width="100%" height="200" />
-                      
-                      <p className = "mt-2"><button className = "btn-sm btn-dark btn-outline-light">Change Photo Profile</button></p>
-                    </div>
-                    <div className = "col-sm">
-                      <ul className = "list-group">
-                        <form>
-                        <label className = "mb-0" htmlFor = "nama">Nama</label>
-                        <input type = "text" className = "list-group-item border-bottom-5 " defaultValue = {nama_lengkap} placeholder = "Nama Lengkap"></input>
-                        </form>
-                        <form>
-                        <label className = "mb-0" htmlFor = "username">Username</label>
-                        <input type = "text" className = "list-group-item border-bottom-5 " defaultValue = {username} placeholder = "Username"></input>
-                        </form>
-                        <form>
-                        <label className = "mb-0" htmlFor = "email">E-mail</label>
-                        <input type = "text" className = "list-group-item border-bottom-5 " defaultValue = {email} placeholder = "E-mail"></input>
-                        </form>
-                        <form>
-                        <label className = "mb-0" htmlFor = "phone_number">Phone Number</label>
-                        <input type = "text" className = "list-group-item border-bottom-5 " defaultValue = {phone_number} placeholder = "Phone Number"></input>
-                        </form>
-                        
-                      </ul>
-                      <button type = "file" className = "btn btn-outline-light mt-2"  >Done</button>
-                    </div>
-                  </div>
-                </div>
-            
-      )
+    const nama_lengkap = this.nama_lengkap.value
+    const username = this.username.value
+    const email = this.email.value
+    const gender = this.gender.value
+    const phone_number = this.phone_number.value
 
-    }
-
+    axios.patch(
+      'http://localhost:1993/update/profile/' + this.props.user.id,
+      {
+        nama_lengkap,
+        username,
+        email,
+        gender,
+        phone_number
+      }
+    ).then(res => {
+      console.log(res.data);
+      console.log('Upload Berhasil');
+      this.setState({edit: !this.state.edit})
+    }).catch(err =>{
+      console.log(err);
+      
+    })
   }
 
+  getProfile = () => {
+    axios.get('http://localhost:1993/customers/profile/' + this.props.user.id)
+      .then(res => {
+        this.state({profile : res.data})
+        console.log(res.data);
+        
+      })
+  }
+
+
+  componentDidMount(){
+    this.getProfile()
+  }
+
+
+
+
+  
  
   
     
 
     render(){
         if(this.props.user){
-          const {nama_lengkap, username, email, phone_number, id} = this.props.user
+          const {nama_lengkap, username, email, phone_number, id, gender} = this.props.user
           console.log(this.props.user.username)
           if(!this.state.edit){
           return(
-              <Jumbotron className = "bg-dark">
+              <div>
+                <Header/>
+                <Jumbotron className = "bg-dark">
                 <div className = "container">
-                  <h1 className = "text-light">Profile</h1>
+                  <div className = "row">
+                  <h1 className = "text-light col-sm-auto">Profile</h1>
+                  <h5 className = "text-light col-sm-auto mt-3">ID: {id}</h5>
+                  </div>
                   <div className = "row">
                     <div className = "col-sm-auto">
                       <img src ="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" className = "avatar" width="100%" height="200" />
@@ -95,17 +105,20 @@ class Profile extends Component{
                         <li className = "list-group-item border-bottom-5 ">Nama Lengkap : {nama_lengkap}</li>
                         <li className = "list-group-item border-bottom-5">E-mail : {email}</li>
                         <li className = "list-group-item border-bottom-3">Phone Number : {phone_number}</li>
-                        <li className = "list-group-item border-bottom-3">ID : {id}</li>
+                        <li className = "list-group-item border-bottom-3">Gender : {gender}</li>
                       </ul>
-                      <button type = "file" className = "btn btn-outline-light mt-2" onClick = {() => {this.setState({edit: !this.state.edit})}} >Edit Profile</button>
+                      <button  className = "btn btn-outline-light mt-2" onClick = {() => {this.setState({edit: !this.state.edit})}} >Edit Profile</button>
                     </div>
                   </div>
                 </div>
               </Jumbotron>
+              </div>
             )
           } else {
             return (
-            <Jumbotron className = "bg-dark">
+            <div>
+              <Header/>
+              <Jumbotron className = "bg-dark">
                   <div className = "container">
                   <h1 className = "text-light">Edit Profile</h1>
                   <div className = "row">
@@ -116,18 +129,26 @@ class Profile extends Component{
                     </div>
                     <div className = "col-sm">
                       <label className="text-light">Nama</label>
-                      <input className="form-control"></input>
+                        <input className="form-control" defaultValue = {nama_lengkap} ref = {input => this.nama_lengkap = input} ></input>
                       <label className="text-light">Email</label>
-                      <input className="form-control"></input>
+                        <input className="form-control" defaultValue = {email} ref = {input => this.email = input}></input>
                       <label className="text-light">Username</label>
-                      <input className="form-control"></input>
+                        <input className="form-control" defaultValue = {username} ref = {input => this.username = input}></input>
                       <label className="text-light">No Telepon</label>
-                      <input className="form-control"></input>
+                      <input className="form-control" defaultValue = {phone_number} ref = {input => this.phone_number = input}></input>
+                      <label className="text-light">Gender</label>
+                        <select className="form-control" defaultValue = {gender} ref = {input => this.gender = input}>
+                                    <option value = "Male">Male</option>
+                                    <option value = "Female">Female</option>
+                                   
+                                </select>
                       <button type = "file" className = "btn btn-outline-light mt-2" onClick = {() => {this.setState({edit: !this.state.edit})}} >Cancel</button>
+                      <button type = "file" className = "btn btn-outline-light mt-2 ml-2" onClick = {this.onButtonClick} >Done</button>
                     </div>
                   </div>
                 </div>
                 </Jumbotron>
+            </div>
             )  
         }
         } 

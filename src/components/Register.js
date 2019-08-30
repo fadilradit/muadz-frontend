@@ -4,6 +4,7 @@ import Username from '@material-ui/icons/AccountCircle'
 import Phone from '@material-ui/icons/Phone'
 import axios from 'axios'
 
+import Header from './Header'
 import background from '../Image/BW.jpg'
 import { isNull } from 'util';
 
@@ -86,9 +87,11 @@ class Register extends Component{
         if (this.state.regis) {
             return <Redirect to='/login'/>}
         return(
-            <div >
+            <div>
+            <Header/>
+            <div className = "container" >
                 <div className = 'mt-5 justify-content-center row'>
-                <div className = ' col-sm-4  card' style = {{backgroundImage: `url(${background})`}} >
+                <div className = ' col-sm-auto  card' style = {{backgroundImage: `url(${background})`}} >
                     <div className = 'card-body '>
                         
                         <div className = 'border-bottom border-light card-title'>
@@ -140,8 +143,8 @@ class Register extends Component{
                             
                                 <select className="form-control"
                                     ref = {(input) => {this.gender = input}} >
-                                    <option value = "M">Male</option>
-                                    <option value = "F">Female</option>
+                                    <option value = "Male">Male</option>
+                                    <option value = "Female">Female</option>
                                    
                                 </select>
                         </div>
@@ -151,6 +154,7 @@ class Register extends Component{
             
                     </div>
                 </div>
+            </div>
             </div>
             </div>
         )

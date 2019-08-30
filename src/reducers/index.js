@@ -5,6 +5,11 @@ const init = {
     username: ''
 }
 
+const initAdmin = {
+    id: '',
+    username: ''
+}
+
 const AuthReducers = (data = init, action) => {
     switch(action.type) {
         case "LOGIN_SUCCESS":
@@ -34,8 +39,29 @@ const AuthReducers = (data = init, action) => {
     }
 }
 
+const AuthReducersAdmin = (data = initAdmin, action) => {
+    switch(action.type) {
+        case "LOGIN_ADMIN_SUCCESS":
+            return {
+                ...data,
+                id: action.payload.id,
+                username: action.payload.username
+            }
+        case "LOGOUT_ADMIN_SUCCESS":
+            return {
+                ...data,
+                id: '',
+                username: ''
+
+            }
+            default:
+                return data
+    }
+}
+
 export default combineReducers (
     {
-        auth: AuthReducers
+        auth: AuthReducers,
+        authAdmin: AuthReducersAdmin
     }
 )

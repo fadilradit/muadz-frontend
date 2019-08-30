@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import {onLogoutUser} from '../action/index'
+import {onLogoutAdmin} from '../action/index'
 import Cart from '@material-ui/icons/ShoppingCart';
+import cookies from 'universal-cookie'
+
 
 
 
@@ -23,14 +25,9 @@ ToggleButton,
   
 } from 'react-bootstrap'
 
-import Paper from '@material-ui/core/Paper'
-import IconButton from '@material-ui/core/IconButton'
-import SearchIcon from '@material-ui/icons/Search'
-import ShoppingBasket from '@material-ui/icons/ShoppingBasket'
-import Favorite from '@material-ui/icons/Favorite'
 import DropdownMenu from 'react-bootstrap/DropdownMenu';
 
-
+const cookie = new cookies()
 class Header extends Component{
 
   constructor(props) {
@@ -51,13 +48,22 @@ class Header extends Component{
   onButtonClick = () => {
     this.props.onLogoutUser()
   }
+  onButtonClick2 = () => {
+    this.props.onLogoutAdmin()
+  }
 
 
 
 
     render() {
         const {user} = this.props
-        if(user.username === ''){
+        console.log(user);
+        console.log(this.props.admin);
+        
+        
+        
+        
+        if(user.username === '' && this.props.admin.username === ''){
           return(
             
             <div className = "sticky-top">
@@ -98,6 +104,7 @@ class Header extends Component{
                   </Form>
                   </Nav>
                   
+                  <Nav.Link className = "btn btn-dark" href = "/cart"><Cart/></Nav.Link>
 
                   <Form inline>
                     <Nav.Link href="/login" className = "text-light">LOGIN</Nav.Link>
@@ -111,64 +118,64 @@ class Header extends Component{
               
           )
           
-        }
+        }if(user.username !== '' && this.props.admin.username === ''){
+          return (
+            <div className = "sticky-top">
+                  
+                  <Navbar bg="dark" expand="lg">
+                    <Navbar.Brand href="/" className = "text-light">MUADZ</Navbar.Brand>
+                    <Navbar.Toggle />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                      <Nav className="mr-auto">
+                        
+                      <Dropdown>
+                          <Dropdown.Toggle variant="dark">MEN</Dropdown.Toggle>
+    
+                          <DropdownMenu>
+                          <Dropdown.Item >Action</Dropdown.Item>
+                          <Dropdown.Item >Another action</Dropdown.Item>
+                          <Dropdown.Item >Something</Dropdown.Item>
+                          <Dropdown.Divider />
+                          <Dropdown.Item >Separated link</Dropdown.Item>
+                          </DropdownMenu>
+                        </Dropdown>
+    
+                        <Dropdown>
+                          <Dropdown.Toggle variant="dark">WOMEN</Dropdown.Toggle>
+    
+                          <DropdownMenu>
+                          <Dropdown.Item >Action</Dropdown.Item>
+                          <Dropdown.Item >Another action</Dropdown.Item>
+                          <Dropdown.Item >Something</Dropdown.Item>
+                          <Dropdown.Divider />
+                          <Dropdown.Item >Separated link</Dropdown.Item>
+                          </DropdownMenu>
+                        </Dropdown>
+    
+                        <Form inline>
+                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                        <Button variant="outline-light">Search</Button>
+                      </Form>
+                      </Nav>
+    
+                      
+                        <Nav.Link className = "btn btn-dark" href = "/cart"><Cart/></Nav.Link>
+                      
+    
+    
+                      
+                      <Nav.Link href = "/profile" className = "text-light">Profile</Nav.Link>
+                      <Nav.Link className = "text-light" href = "/" onClick = {this.onButtonClick}>LOGOUT</Nav.Link>
+                      
+                      
+    
+                    </Navbar.Collapse>
+                  </Navbar>
       
-      return (
-        <div className = "sticky-top">
-              
-              <Navbar bg="dark" expand="lg">
-                <Navbar.Brand href="/" className = "text-light">MUADZ</Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav className="mr-auto">
-                    
-                  <Dropdown>
-                      <Dropdown.Toggle variant="dark">MEN</Dropdown.Toggle>
-
-                      <DropdownMenu>
-                      <Dropdown.Item >Action</Dropdown.Item>
-                      <Dropdown.Item >Another action</Dropdown.Item>
-                      <Dropdown.Item >Something</Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item >Separated link</Dropdown.Item>
-                      </DropdownMenu>
-                    </Dropdown>
-
-                    <Dropdown>
-                      <Dropdown.Toggle variant="dark">WOMEN</Dropdown.Toggle>
-
-                      <DropdownMenu>
-                      <Dropdown.Item >Action</Dropdown.Item>
-                      <Dropdown.Item >Another action</Dropdown.Item>
-                      <Dropdown.Item >Something</Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item >Separated link</Dropdown.Item>
-                      </DropdownMenu>
-                    </Dropdown>
-
-                    <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-light">Search</Button>
-                  </Form>
-                  </Nav>
-
-                  
-                    <Nav.Link className = "btn btn-dark" href = "/profile"><Cart/></Nav.Link>
-                  
-
-
-                  
-                  <Nav.Link href = "/profile" className = "text-light">Profile</Nav.Link>
-                  <Nav.Link className = "text-light" href = "/" onClick = {this.onButtonClick}>LOGOUT</Nav.Link>
-                  
-                  
-
-                </Navbar.Collapse>
-              </Navbar>
-  
-            </div>
-      )
-        
+                </div>
+          )
+    
+        }        
         
     }
 
@@ -179,7 +186,8 @@ class Header extends Component{
 
 const mapStateToProps = state => {
   return {
-    user: state.auth
+    user: state.auth,
+    admin: state.authAdmin
   }
 }
 export default connect(mapStateToProps, {onLogoutUser}) (Header);

@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import {onLoginUser} from '../action/index'
-
 import {Redirect} from 'react-router-dom'
 
+import Header from './Header'
 import background from '../Image/BW.jpg'
 
 class Login extends Component{
@@ -25,6 +25,7 @@ class Login extends Component{
         if(this.props.user.username === ''){
             return(
                 <div>
+                    <Header/>
                     <div className = 'mt-5 justify-content-center row' style = {{marginLeft: 50 , marginRight:50}}>
                     <div className = ' col-sm-4  card' style = {{backgroundImage: `url(${background})`}}>
                         <div className = 'card-body'>
