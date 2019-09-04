@@ -27,7 +27,7 @@ class ProductDetail extends Component{
 
   state = {
     products: [],
-    redirect: true
+    redirect: false
   }
 
   refresh = (reload) => {
@@ -112,16 +112,19 @@ class ProductDetail extends Component{
 
 
     render(){
-      var {name_product,description,price,category_name} = this.state.products
+      var {name_product,description,price,category_name, product_image} = this.state.products
+      console.log(typeof(price));
+      
         return(
           <div>
             <Header/>
-            <div className = "card col-6 mt-5 mx-auto">
-            <img className = "card-img-top"/>
+            {this.renderRedirect()}
+            <div className = "card col-6 mt-5 mb-5 mx-auto border border-dark border-8">
+            <img className = "card-img-top mt-2" src = {`http://localhost:1993/getproduct/image/${product_image}`} width = "300" height = "400" />
             <div className = "card-body">
               <h3>{name_product}</h3>
               <p className = "card-text">{description}</p>
-              <p className = "card-text">$.{price}</p>
+              <p className = "card-text">Rp. {price}</p>
               <button className = "btn btn-dark"  onClick = {() => {this.addToCart(this.state.products)}} >Add To Cart</button>
             </div>
           </div>

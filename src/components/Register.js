@@ -134,9 +134,6 @@ class Register extends Component{
                         <form className = 'input-group mt-3'>
                             <input type = 'password' className = 'form-control' placeholder = 'password'
                                 ref = {(input) => {this.password = input}} />
-                            <div className = "input-group-prepend">
-                                <button className = "btn btn-light btn-outline-light input-group text-dark" >Tampilkan</button>
-                            </div>
                         </form>
 
                         <div className="form-group mt-3">

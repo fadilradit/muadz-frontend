@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
+import {updateProfile} from '../action/index'
 
 import Header from './Header'
 import {
@@ -31,10 +32,31 @@ class Profile extends Component{
   }
 
 
+  refresh = (reload) => {
+    document.location.reload(reload)
+  }
+
+  uploadAvatar = (id) => {
+      const formData = new FormData()
+      const image = this.image.files[0] 
+
+      formData.append('image', image)
+      formData.append('id', id)
+
+    axios.post('http://localhost:1993/upload/avatar/', formData
+    ).then(res => {
+      console.log(res.data);
+      this.props.updateProfile(this.props.user.id)
+      
+    })
+
+
+  }
+
+
   onButtonClick = () => {
 
     const nama_lengkap = this.nama_lengkap.value
-    const username = this.username.value
     const email = this.email.value
     const gender = this.gender.value
     const phone_number = this.phone_number.value
@@ -43,7 +65,6 @@ class Profile extends Component{
       'http://localhost:1993/update/profile/' + this.props.user.id,
       {
         nama_lengkap,
-        username,
         email,
         gender,
         phone_number
@@ -52,6 +73,7 @@ class Profile extends Component{
       console.log(res.data);
       console.log('Upload Berhasil');
       this.setState({edit: !this.state.edit})
+      this.props.updateProfile(this.props.user.id)
     }).catch(err =>{
       console.log(err);
       
@@ -82,7 +104,7 @@ class Profile extends Component{
 
     render(){
         if(this.props.user){
-          const {nama_lengkap, username, email, phone_number, id, gender} = this.props.user
+          const {nama_lengkap, username, email, phone_number, id, gender, avatar} = this.props.user
           console.log(this.props.user.username)
           if(!this.state.edit){
           return(
@@ -96,7 +118,7 @@ class Profile extends Component{
                   </div>
                   <div className = "row">
                     <div className = "col-sm-auto">
-                      <img src ="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" className = "avatar" width="100%" height="200" />
+                      <img src ={`http://localhost:1993/customer/avatar/${avatar}`} alt = "Please Choose your Avatar" className = "text-light" width="200" height="100%" />
                       <p><h3 className = "text-light">@<a>{username}</a></h3></p>
                       
                     </div>
@@ -123,8 +145,8 @@ class Profile extends Component{
                   <h1 className = "text-light">Edit Profile</h1>
                   <div className = "row">
                     <div className = "col-sm-auto">
-                      <img src ="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" className = "avatar" width="100%" height="" />
-                      <input type="file" className="form-control" placeholder=""/>
+                      <img src ={`http://localhost:1993/customer/avatar/${avatar}`} alt = "Please Choose Your Avatar" className = "img text-light" width="300" height="300" />
+                      <input type="file" className="form-control" ref ={input => this.image = input}/>
                       
                     </div>
                     <div className = "col-sm">
@@ -132,8 +154,6 @@ class Profile extends Component{
                         <input className="form-control" defaultValue = {nama_lengkap} ref = {input => this.nama_lengkap = input} ></input>
                       <label className="text-light">Email</label>
                         <input className="form-control" defaultValue = {email} ref = {input => this.email = input}></input>
-                      <label className="text-light">Username</label>
-                        <input className="form-control" defaultValue = {username} ref = {input => this.username = input}></input>
                       <label className="text-light">No Telepon</label>
                       <input className="form-control" defaultValue = {phone_number} ref = {input => this.phone_number = input}></input>
                       <label className="text-light">Gender</label>
@@ -144,6 +164,12 @@ class Profile extends Component{
                                 </select>
                       <button type = "file" className = "btn btn-outline-light mt-2" onClick = {() => {this.setState({edit: !this.state.edit})}} >Cancel</button>
                       <button type = "file" className = "btn btn-outline-light mt-2 ml-2" onClick = {this.onButtonClick} >Done</button>
+                    </div>
+                  </div>
+                  <div className = "row">
+                    <div className = "col-sm-auto">
+                    
+                      <button className = "btn btn-primary mt-3" onClick = {() => {this.uploadAvatar(id)}}>Upload</button>
                     </div>
                   </div>
                 </div>
@@ -168,4 +194,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps) (Profile);
+export default connect(mapStateToProps, {updateProfile}) (Profile);

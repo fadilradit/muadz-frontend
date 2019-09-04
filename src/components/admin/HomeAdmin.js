@@ -27,7 +27,7 @@ class HomeAdmin extends Component{
                         <div className = "card-body">
                             <h4 className = "card-title">Transaction</h4>
                             <h5 className = "card-text">Total:</h5>
-                            <button className = "btn btn-dark">Manage Transaction</button>
+                            <a className = "btn btn-dark" href = "/managetransaction" >Manage Transaction</a>
                         </div>
                     </div>
                     </div>

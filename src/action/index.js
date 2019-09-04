@@ -58,6 +58,41 @@ export const onLogoutUser = () => {
 }
 
 
+
+
+export const updateProfile = (user) =>{
+    cookie.remove('username')
+    return (dispatch) => {
+        axios.get(
+            'http://localhost:1993/customers/profile/'+user
+            ).then(res => {
+                if(typeof(res.data) == 'string'){
+                    alert('Error' + res.data)
+                }else{
+                    console.log(res.data);
+
+                    const {id, username, email, password, phone_number, avatar, nama_lengkap, gender} = res.data[0]
+
+                    dispatch(
+                        {
+                            type: 'LOGIN_SUCCESS',
+                            payload: {
+                                id, username, email, password, phone_number, avatar, nama_lengkap, gender
+                            }
+                        }
+                    )
+
+                    cookie.set('username', {id, username, email, password, phone_number, avatar, nama_lengkap, gender})
+                }
+            })
+    }
+}
+
+
+
+
+
+//=================================================================================================
 export const onLoginAdmin = (username, password) =>{
     
     //TEMBAK DATA KE DATABASE
@@ -80,7 +115,7 @@ export const onLoginAdmin = (username, password) =>{
                         id, username
                     }
                 })
-                cookie.set('Admin', {id, username}, {path: '/HomeAdmin'})
+                cookie.set('admin', {id, username}, {path: '/HomeAdmin'})
             }
         })
     }

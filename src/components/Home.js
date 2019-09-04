@@ -11,6 +11,7 @@ import fotoSlide3 from '../Image/3.jpg'
 import Banner from './Banner'
 import Header from './Header'
 import ProductList from './ProductList'
+import ProductFilter from './ProductFilter'
 import axios from 'axios'
 
 class Home extends Component{

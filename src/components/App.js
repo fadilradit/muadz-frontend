@@ -12,8 +12,12 @@ import AddProduct from './admin/AddProduct'
 import AddCategories from './admin/AddCategories'
 import LoginAdmin from './admin/LoginAdmin'
 import HomeAdmin from './admin/HomeAdmin'
+import ManageTransaction from './admin/ManageTransaction'
 import ProductList from './ProductList'
 import Cart from './Cart'
+import ProductFilter from './ProductFilter'
+import Checkout from './Checkout'
+import OrderList from './OrderList'
 
 import {keepLogin} from '../action/index'
 import {keepLoginAdmin} from '../action/index'
@@ -22,10 +26,9 @@ const cookie = new cookies()
 
 class App extends Component{
 
-    componentDidMount() {
+    componentWillMount() {
         const objCookie = cookie.get('username')
         const objCookie2 = cookie.get('Admin')
-        console.log(objCookie2);
         
 
         if(objCookie !== undefined){
@@ -52,6 +55,10 @@ class App extends Component{
                     <Route path="/homeadmin" component={HomeAdmin}/>
                     <Route path="/productlist" component={ProductList}/>
                     <Route path="/cart" component={Cart}/>
+                    <Route path="/productfilter" component={ProductFilter}/>
+                    <Route path="/checkout" component={Checkout}/>
+                    <Route path="/orderlist" component={OrderList}/>
+                    <Route path="/managetransaction" component={ManageTransaction}/>
                 </div>
             </BrowserRouter>
         )

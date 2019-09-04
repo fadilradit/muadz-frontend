@@ -37,7 +37,7 @@ import {
                 <div className = "sticky-top">
               
               <Navbar bg="dark" expand="lg">
-                <Navbar.Brand href="/" className = "text-light">MUADZ</Navbar.Brand>
+                <Navbar.Brand href="/HomeAdmin" className = "text-light">MUADZ</Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Form inline>

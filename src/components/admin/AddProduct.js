@@ -22,6 +22,20 @@ componentDidMount(){
     this.getProduct()
 }
 
+uploadImage = (id) => {
+    const formData = new FormData()
+    const product_image = this.product_image.files[0]
+
+    formData.append('product_image', product_image)
+    formData.append('id', id)
+
+    axios.post('http://localhost:1993/product/image', formData
+    ).then(res => {
+        this.getProduct()
+        this.setState({edit: !this.state.edit})
+    })
+}
+
 
 getCategories = () =>{
     axios.get('http://localhost:1993/showcategory')
@@ -44,6 +58,10 @@ addProduct = () => {
     const price = this.price.value
     const description = this.description.value
     const category_id = this.category_id.value
+
+    if(name_product === '' || price === '' || description === '' || category_id === ''){
+        alert('Harap Lengkapi Data Product Yang Akan Di Tambahkan')
+    }
 
     axios.post('http://localhost:1993/addproduct', 
     {
@@ -81,9 +99,11 @@ renderProduct = () => {
                     <td>{productMap.id}</td>
                     <td>{productMap.name_product}</td>
                     <td>{productMap.description}</td>
-                    <td>{productMap.price}</td>
+                    <td>Rp.{productMap.price.toLocaleString('IN')}</td>
                     <td>{productMap.category_name}</td>
-                    <td>{productMap.product_image}</td>
+                    <td>
+                        <img src = {`http://localhost:1993/getproduct/image/${productMap.product_image}`} className = "" width="200" height="200" />
+                    </td>
                     <td>
                         <button className="btn btn-primary" onClick = {() => {this.setState({edit: productMap.id})}}>Edit</button>
                         <button className="btn btn-primary ml-2" onClick = {() => {this.deleteProduct(productMap.id)}}>Delete</button>
@@ -100,10 +120,13 @@ renderProduct = () => {
                     <td><select className = "form-control" value = {productMap.category_id} ref = {input => {this.editCategory_Id = input}} >
                             {this.renderCategories()}
                         </select></td>
-                    <td>{productMap.product_image}</td>
+                    <td>
+                        <input type = "file" ref = {input => (this.product_image = input)}></input>
+                    </td>
                     <td>
                         <button className="btn btn-primary" onClick = {() => {this.saveEdit(productMap.id)}}>Save</button>
-                        <button className="btn btn-primary mt-2 ml-2" onClick = {() => {this.setState({edit: 0})}}>Cancel</button>
+                        <button className="btn btn-primary  ml-2" onClick = {() => {this.setState({edit: 0})}}>Cancel</button>
+                        <button className="btn btn-primary mt-2 " onClick = {() => {this.uploadImage(productMap.id)}}>Upload Image</button>
                     </td>
                 </tr>
         )
@@ -172,8 +195,6 @@ deleteProduct = (productMap) => {
                                     </select>
                                     <label>Description</label>
                                     <textarea  className = "form-control" ref = {input => this.description = input} ></textarea>
-                                    <label>Image Product</label>
-                                    <input type = "file" className = "form-control"></input>
                                     <button className = "btn btn-outline-dark mt-3" onClick = {this.addProduct} >Add</button>
                                     <button className = "btn btn-outline-dark mt-3 ml-2" onClick = {() => {this.setState({add: !this.state.add})}}>Cancel</button>
                                 </div>
