@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import  {Link} from 'react-router-dom'
-import Header from './Header'
+import Header from '../Header/Header'
+import {Redirect} from 'react-router-dom'
 
-import ProductDetail from './ProductDetail'
+import ProductDetail from '../../Page/User/ProductDetail/ProductDetail'
 import { parse } from 'url';
 import { type } from 'os';
 import { string } from 'prop-types';
+import './ProductList.css'
 
 
 class ProductList extends Component{
@@ -148,20 +150,46 @@ class ProductList extends Component{
         return this.state.products.map(item => {
             
             return(
-                
-                    <div className = " card col-5 m-3 border border-5 border-dark card">
-                        <img className = " card-img-top mt-2" src = {`http://localhost:1993/getproduct/image/${item.product_image}`} width = "200" height = "200"/>
-                        <h5 className = "card-title">{item.name_product}</h5>
-                        <p className = "card-text">Rp.{item.price.toLocaleString('IN')}</p>
-                        <p className = "card-text">Category: {item.category_name}</p>
-                        <Link to = {'/productdetail/' + item.id}>
-                            <button  className = "btn btn-dark mb-2" >Detail</button>
-                        </Link>
+                <Link to = {'/productdetail/' + item.id} className = "text-link" >
+                    <div className = "card" to = {'/productdetail/' + item.id} >
+                    <div  className = "card-content" >
+                    <img src = {`http://localhost:1993/getproduct/image/${item.product_image}`} />
                     </div>
+                    <label className = "title" >{item.name_product}</label>
+                    <p className = "price" >Rp.{item.price.toLocaleString('IN')}</p>
+                    <p className = "category" >Category: {item.category_name}</p>
+                </div>
+                </Link>
+                
+                
+                    // <div className = " card col-5 m-3 border border-5 border-dark card">
+                    //     <img className = " card-img-top mt-2" src = {`http://localhost:1993/getproduct/image/${item.product_image}`} width = "200" height = "200"/>
+                    //     <h5 className = "card-title">{item.name_product}</h5>
+                    //     <p className = "card-text">Rp.{item.price.toLocaleString('IN')}</p>
+                    //     <p className = "card-text">Category: {item.category_name}</p>
+                    //     <Link to = {'/productdetail/' + item.id}>
+                    //         <button  className = "btn btn-dark mb-2" >Detail</button>
+                    //     </Link>
+                    // </div>
 
                     
             )
         })
+    }
+
+    searchToggle = () => {
+        const search = document.querySelector('h3')
+        const input = document.querySelector('div.input-filter')
+        const buttonGroup = document.querySelector('div.filter-button')
+        
+
+        search.classList.toggle('slide')
+        input.classList.toggle('slide')
+        buttonGroup.classList.toggle('slide')
+    
+        // nav.classList.toggle('slide')
+        
+    
     }
 
     
@@ -171,35 +199,69 @@ class ProductList extends Component{
     render(){
        
             return(
-            <div className = "container">
-                <div className = "row justify-content-between">
-                <div className = "col-3-auto ml-5 mt-3 ">
-                    <div>
-                        <h3>Filter By:</h3>
-                        <label>Name</label>
-                        <input className = "form-control" ref = {input => {this.name_search = input}}></input>
-                        <label>Category</label>
-                        <input className = "form-control" ref = {input => {this.category_search = input}}></input>
-                        <label>Price</label>
-                        <input className = "form-control" placeholder = "MAX" ref = {input => {this.max = input}}></input>
-                        <input className = "form-control" placeholder = "MIN" ref = {input => {this.min = input}}></input>
+                <div className = "productlist-body" >
 
-                        <button className = "mt-2 btn btn-success" onClick = {() => {this.onButtonSearch()}}>Search</button>
-                        <button className = "mt-2 ml-3 btn btn-success" onClick = {() => {this.resetFilter()}}>Cancel</button>
-                        
+                    <div className = "filter-product" >
+
+                        <div className = 'menu-toogle' onClick = {this.searchToggle} >
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <h3 className = "search-head" >Search By :</h3>
+
+                        <div className = "input-filter" >
+                            
+                            <input placeholder = "Product Name" ref = {input => {this.name_search = input}} />
+                            <input placeholder = "Category" ref = {input => {this.category_search = input}} />
+                            <input placeholder = "MAX Price" ref = {input => {this.max = input}} />
+                            <input placeholder = "MIN Price"ref = {input => {this.min = input}} />
+                        </div>
+
+                        <div className = 'filter-button' >
+                            <button onClick = {() => {this.onButtonSearch()}} >Search</button>
+                            <button onClick = {() => {this.resetFilter()}} >Reset</button>
+                        </div>
+
                     </div>
 
-                </div>
-                <div className = "col-8 mt-3 border border-dark border-8">
-                    <div>
-                        <h3>Product</h3>
-                    </div>
-                    <div className = "row col-10-auto">
+                    
+
+                    <div className = "product-list" >
                         {this.renderList()}
                     </div>
+
                 </div>
-            </div>
-            </div>
+            // <div className = "container">
+            //     <div className = "row justify-content-between">
+            //     <div className = "col-3-auto ml-5 mt-3 ">
+            //         <div>
+            //             <h3>Filter By:</h3>
+            //             <label>Name</label>
+            //             <input className = "form-control" ref = {input => {this.name_search = input}}></input>
+            //             <label>Category</label>
+            //             <input className = "form-control" ref = {input => {this.category_search = input}}></input>
+            //             <label>Price</label>
+            //             <input className = "form-control" placeholder = "MAX" ref = {input => {this.max = input}}></input>
+            //             <input className = "form-control" placeholder = "MIN" ref = {input => {this.min = input}}></input>
+
+            //             <button className = "mt-2 btn btn-success" onClick = {() => {this.onButtonSearch()}}>Search</button>
+            //             <button className = "mt-2 ml-3 btn btn-success" onClick = {() => {this.resetFilter()}}>Cancel</button>
+                        
+            //         </div>
+
+            //     </div>
+            //     <div className = "col-8 mt-3">
+            //         <div>
+            //             <h3>Product:</h3>
+            //         </div>
+            //         <div className = "row col-10-auto">
+            //             {this.renderList()}
+            //         </div>
+            //     </div>
+            // </div>
+            // </div>
             )
         
         

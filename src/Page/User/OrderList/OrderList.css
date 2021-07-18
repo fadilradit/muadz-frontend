@@ -1,0 +1,219 @@
+.payment-body{
+    margin: 53px auto 0px ;
+    width: 85%;
+    padding: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    color: #585858;
+    /* background-color: blue; */
+    height: 1000px;
+}
+
+.payment-body .payment-title{
+    font-size: 1.42857rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 30px;
+    /* background-color: violet; */
+    padding: 5px;
+}
+
+.payment-body .payment-title img{
+    display: none;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.payment-body .payment-detail{
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height:fit-content;
+    margin: auto;
+    border: solid .5px rgb(118, 119, 119) ;
+    border-radius: 3px;
+    box-shadow: 0 0 5px 0 ;
+    padding: 5px;
+
+}
+
+.payment-body #payment-bank{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: hsla(46, 92%, 48%, 0.89);
+    width: 100%;
+    font-size: large;
+    font-weight:bold;
+    border-bottom: solid .5px rgb(134, 134, 134);
+    color: rgb(255, 255, 255);
+    
+}
+
+.payment-body #payment-rekening{
+    display: flex;
+    flex-direction: row;
+    /* background-color:aquamarine; */
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.payment-body #payment-rekening #rekening-detail h1{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.payment-body #payment-rekening #rekening-detail h2{
+    color: rgb(156, 156, 156);
+}
+
+.payment-body #payment-rekening #rekening-copy{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* background-color: aquamarine; */
+}
+
+.payment-body #payment-rekening #rekening-copy img{
+    height: 18px;
+    width: 18px;
+}
+
+.payment-body #payment-rekening #rekening-copy h1{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.payment-body #payment-rekening #rekening-copy h1:hover {
+    cursor:pointer;
+}
+
+.payment-body .payment-detail .payment-total{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.payment-body .payment-detail .payment-total .payment-totaldetail h2{
+    color: rgb(156, 156, 156);
+}
+
+.payment-body .payment-detail .payment-total .payment-totaldetail h1{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.payment-body .payment-detail .payment-total .payment-kurir h2{
+    color: rgb(156, 156, 156);
+}
+
+.payment-body .payment-detail .payment-total .payment-kurir h1{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.payment-body .payment-detail .payment-info{
+    padding: 10px;
+    background-color: #e2a66e;
+    border-radius: 8px;
+}
+
+.payment-body .payment-detail .payment-info h1{
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(23, 23, 24);
+}
+
+.payment-body .payment-detail .payment-info h2{
+    
+    
+    color: rgb(23, 23, 24);
+}
+
+.payment-body .payment-detail .payment-upload{
+    padding: 10px;
+    /* background-color: aqua; */
+}
+
+.payment-body .payment-detail .payment-upload .payment-img{
+    /* background-color: rgba(119, 128, 128, 0.521); */
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 0;
+    /* border: solid 1px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-body .payment-detail .payment-upload .payment-img img{
+    width: 100%;
+    height: 100%;
+}
+
+.payment-body .payment-detail .payment-upload .payment-button {
+    margin-top: 5px;
+    /* background-color: aquamarine; */
+    display: flex;
+    justify-content: center;
+    
+}
+
+.payment-body .payment-detail .payment-upload .payment-button button{
+    width: 30%;
+
+}
+
+.payment-body .payment-detail .payment-upload .payment-button .pick-file{
+    margin-right: 2px;
+    background-color: rgb(218, 117, 2);
+    font-weight: 600;
+}
+
+.payment-body .payment-detail .payment-upload .payment-button .upload-button{
+    margin-left: 2px;
+    background-color: rgb(14, 158, 57);
+    font-weight: 600;
+
+}
+
+/* Responsive Breakpoint */
+
+@media  screen and (max-width:1024px) {
+    .payment-body .payment-detail{
+        width: 70%;
+    }
+}
+
+@media  screen and (max-width:768px){
+    .payment-body .payment-detail{
+        width: 85%;
+    }
+}
+
+
+@media  screen and (max-width:568px){
+    .payment-body{
+        width: 100%;
+    }
+
+    .payment-body .payment-detail{
+        width: 100%;
+    }
+
+    .payment-body .payment-detail .payment-upload .payment-button button{
+        width: 40%;
+    
+    }
+
+    .payment-body .payment-title img{
+        display: unset;
+    }
+}
+

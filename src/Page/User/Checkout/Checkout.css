@@ -1,0 +1,250 @@
+.checkout-body{
+    margin: 53px auto 0px ;
+    width: 85%;
+    padding: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    color: #585858;
+    /* background-color: black; */
+}
+
+.checkout-body .checkout-title{
+    font-size: 1.42857rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 30px;
+    /* background-color: violet; */
+    padding: 5px;
+}
+
+.checkout-body .checkout-title img{
+    display: none;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.checkout-body .content{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    /* background-color: blueviolet; */
+    justify-content: space-between;
+}
+
+.content .data-form{
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    letter-spacing: 1px;
+    font-weight: bold;
+    /* background-color: rgb(26, 56, 46); */
+    /* height: 300px; */
+}
+
+.content .data-form input{
+    width:80%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.content .data-form label{
+    margin-bottom: 2px;
+}
+
+.content .data-form textarea{
+    /* resize: none; */
+    height: 150px;
+    width: 80%;
+    margin-bottom: 10px;
+    resize: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.842);
+    border: solid 1.5px ;
+}
+
+.content .data-form select{
+    width: 80%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.checkout-body .content .checkoutdetail-body{
+    width: 50%;
+    /* background-color: aqua; */
+}
+
+#checkout-detail{
+    display: flex;
+    flex-direction: column;
+    /* background-color: burlywood; */
+    height: fit-content;
+    width:80%;
+    margin: 0 auto;
+    padding: 10px;
+    border: solid 3px;
+    border-radius: 10px;
+    align-items: flex-start;
+    box-shadow: 0px 0px 10px 0px;
+    /* position: fixed; */
+}
+
+#checkout-detail h1{
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    font-weight: 600;
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+#checkoutdetail-label{
+    /* border: solid 1px; */
+    padding: 5px;
+    text-align:center;
+    width: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    font-size: 17px;
+    /* background-color: darkgrey; */
+    margin-bottom: 5px;
+    align-self: center;
+
+}
+
+#checkoutdetail-label .checkouthead-item{
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-around; */
+    /* background-color: brown; */
+    /* border: 1px solid; */
+    background-color: rgb(228, 228, 228);
+}
+#checkoutdetail-label .checkouthead-item th{
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-around; */
+    /* background-color: brown; */
+    /* border: 1px solid; */
+    padding: 5px 8px;
+}
+
+#checkoutdetail-label .checkout-item{
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* justify-content: space-around; */
+    /* background-color: darkgreen; */
+    /* border: 1px solid; */
+
+}
+#checkoutdetail-label .checkout-item td{
+    /* display: flex; */ 
+    /* flex-direction: row; */
+    /* justify-content: space-around; */
+    /* background-color: darkgreen; */
+    /* border: 1px solid; */
+    padding: 5px 8px;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+
+}
+
+ #total-pay{
+    display: flex;
+    justify-content: space-between;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+#total-pay .total-payment{
+    text-indent: 10px;
+}
+
+#pay-button{
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+/* Responsive Breakpoint */
+
+/* Tablet */
+
+@media  screen and (max-width:1024px) {
+
+    #content #data-form{
+        width: 40%;
+    }
+
+    #content #checkoutdetail-body{
+        width: 60%;
+    }
+    
+    #checkout-detail{
+        width: 100%;
+    }
+
+    .checkout-body .checkout-title img{
+        display: unset;
+    }
+        
+        
+    }
+    
+    /* Mobile */
+    
+    @media  screen and (max-width:650px) {
+
+        #content #data-form{
+            width: 100%;
+            margin-bottom: 30px;
+            padding: 10px;
+        }
+
+        #content #checkoutdetail-body{
+            width: 100%;
+            
+        }
+    
+        .checkout-body{
+            width: 100%;
+            padding: 0;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .checkout-body .content{
+            flex-direction: column;
+        }
+
+        .content .data-form input{
+            width:100%;
+            
+        }
+        
+        .content .data-form textarea{
+            width: 100%;
+        }
+        
+        .content .data-form select{
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #checkoutdetail-label{
+            display: none;
+        
+        }
+
+        .checkoutdetail-body .checkout-detail h1{
+            display: none;
+        }
+        
+        
+    }
+    

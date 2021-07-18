@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import {onLoginUser} from '../action/index'
+import {onLoginUser} from '../../../action/index'
 import {Redirect} from 'react-router-dom'
 
-import Header from './Header'
-import background from '../Image/BW.jpg'
+import Header from '../../../components/Header/Header'
+import background from '../../../Image/BW.jpg'
 
 class Login extends Component{
 

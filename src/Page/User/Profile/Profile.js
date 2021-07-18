@@ -2,20 +2,12 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
-import {updateProfile} from '../action/index'
+import {updateProfile} from '../../../action/index'
 
-import Header from './Header'
+import Header from '../../../components/Header/Header'
 import {
-    Jumbotron,
-    Button,
-    Container,
-    Row,
-    Col,
-    Image,
-    ButtonToolbar,
-    Modal
+    Jumbotron
 } from 'react-bootstrap'
-import { statement } from '@babel/template';
 
 
 
@@ -83,7 +75,7 @@ class Profile extends Component{
   getProfile = () => {
     axios.get('http://localhost:1993/customers/profile/' + this.props.user.id)
       .then(res => {
-        this.state({profile : res.data})
+        this.setState({profile : res.data})
         console.log(res.data);
         
       })

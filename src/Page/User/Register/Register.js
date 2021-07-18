@@ -4,9 +4,8 @@ import Username from '@material-ui/icons/AccountCircle'
 import Phone from '@material-ui/icons/Phone'
 import axios from 'axios'
 
-import Header from './Header'
-import background from '../Image/BW.jpg'
-import { isNull } from 'util';
+import Header from '../../../components/Header/Header'
+import background from '../../../Image/BW.jpg'
 
 
 class Register extends Component{
