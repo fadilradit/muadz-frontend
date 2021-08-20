@@ -3,11 +3,10 @@ import axios from 'axios'
 import  {Link} from 'react-router-dom'
 import Header from '../Header/Header'
 import {Redirect} from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import ProductDetail from '../../Page/User/ProductDetail/ProductDetail'
-import { parse } from 'url';
-import { type } from 'os';
-import { string } from 'prop-types';
+import SadIcon from '../../Asset/Sad Icon/sad_icon.png'
 import './ProductList.css'
 
 
@@ -125,7 +124,14 @@ class ProductList extends Component{
         if(search[0]){
             this.setState({products: search})
         }else{
-            alert('Product Tidak Tersedia')
+            Swal.fire({
+                title: 'Sorry',
+                text: 'Produk Yang Anda Cari Belum Tersedia',
+                imageUrl: SadIcon,
+                imageHeight:100,
+                imageWidth:100
+                
+              })
         }
     }
 

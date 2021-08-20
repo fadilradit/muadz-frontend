@@ -1,0 +1,119 @@
+.login-body{
+    margin: 53px auto 0px ;
+    width: 85%;
+    height: 80vh;
+    padding: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    color: #585858;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* background-color: tomato; */
+
+}
+
+.login-body .login-logo{
+    /* background-color: violet; */
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-body .login-logo p{
+    font-size: x-large;
+}
+
+.login-body .login-logo img{
+    width: 75% ;
+}
+
+.login-body .login-form{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-body .login-form .login-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(221, 221, 221);
+    align-items: center;
+    width: 75%;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 ;
+
+}
+
+#login-card #login-formTitle{
+    margin-bottom: 15px;
+}
+
+.login-form #login-card #login-formTitle h1{
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.login-body .login-form .login-card button{
+    width: 40%;
+    margin-bottom: 5px;
+}
+
+.login-body .login-form .login-card input{
+    border-radius: 8px;
+    height: 30px;
+    margin-bottom: 15px;
+    width: 70%;
+}
+
+/* Responsive Breakpoint */
+
+@media screen and (max-width: 1040px ){
+    
+    .login-body .login-form .login-card{
+        width: 80%;
+    }
+
+}
+
+@media screen and (max-width: 980px ){
+
+    .login-body{
+        width: 90%;
+    }
+
+    .login-body .login-form .login-card{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 768px ){
+    .login-body{
+        flex-direction: column;
+    }
+
+    .login-body .login-logo{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .login-body .login-logo p{
+        font-size:large;
+    }
+
+    .login-body .login-form{
+        width: 100%;
+    }
+
+    .login-body .login-form .login-card input{
+        width: 85%;
+    }
+
+    .login-body .login-form .login-card button{
+        width: 60%;
+    }
+
+}

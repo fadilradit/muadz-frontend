@@ -49,7 +49,8 @@ class ManageTransaction extends Component{
     }
 
     renderList = () => {
-        return this.state.checkout.map(item => {
+        const dataTrans = this.state.checkout.reverse()
+        return dataTrans.map(item => {
             if(item.image_checkout !== null){
                 return (
                     <tr>

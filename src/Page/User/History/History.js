@@ -46,6 +46,7 @@ class History extends Component{
 
 
     render(){
+        console.log(this.state.history);
         if(this.state.history.length > 0){
             return(
                 <div>

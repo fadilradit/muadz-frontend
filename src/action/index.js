@@ -1,5 +1,6 @@
 import axios from '../config/axios'
 import cookies from 'universal-cookie'
+import Swal from 'sweetalert2'
 
 const cookie = new cookies()
 
@@ -16,7 +17,14 @@ export const onLoginUser = (username, password) =>{
         }
         ).then(res => {
             if(typeof(res.data) == 'string'){
-                alert(res.data)
+                // alert(res.data)
+                Swal.fire({
+                    title: 'Oopps!',
+                    text: res.data,
+                    icon: 'error',
+                    confirmButtonText: 'Back'
+                  })
+                return console.log(res.data);
             }else{
                 const {id, username, email, password, gender, phone_number, avatar, nama_lengkap } = res.data
                 console.log(res.data);
@@ -28,6 +36,16 @@ export const onLoginUser = (username, password) =>{
                     }
                 })
                 cookie.set('username', {id, username, email, password, gender, phone_number, avatar, nama_lengkap}, {path: '/'})
+                Swal.fire(
+                    {
+                      title: "Success",
+                      text: "Anda Berhasil Login",
+                      icon: "success",
+                      showConfirmButton: false,
+                      timer: 1500
+          
+                    }
+                  )
             }
         })
     }
@@ -52,6 +70,7 @@ export const keepLogin = (objUser) => {
 //LOGOUT
 export const onLogoutUser = () => {
     cookie.remove('username')
+    
     return{
         type: 'LOGOUT_SUCCESS'
     }

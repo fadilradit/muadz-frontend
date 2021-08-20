@@ -1,0 +1,285 @@
+.profile-body{
+    margin: 53px auto 0px ;
+    width: 85%;
+    padding: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    color: #585858;
+    /* background-color: blue; */
+    /* height: 1000px; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-body .profile-title{
+    font-size: 1.42857rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 30px;
+    /* background-color: violet; */
+    padding: 5px;
+}
+
+.profile-body .profile-content{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 100%;
+    background-color: rgb(244, 246, 250);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.profile-body .profile-content .profile-image{
+    height: 380px;
+    width: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px 0 ;
+    border: solid .5px rgb(118, 119, 119) ;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('UserIcon.png');
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+
+}
+
+.profile-body .profile-content .profile-image img{
+    width: 100%;
+    height: 100%;
+    /* display: none; */
+    position:absolute;
+    
+}
+
+.profile-body .profile-content .profile-image h5{
+    position:relative;
+    font-weight: 700;
+    font-size: large;
+    display: none;
+    color:rgb(156, 39, 6);
+    
+}
+
+.profile-body .profile-content .profile-image:hover img{
+    cursor: pointer;
+    
+    transition:all .5s;
+}
+
+.profile-body .profile-content .profile-image:hover h5{
+    display: block;
+    transition: .5s;
+}
+
+.profile-body .profile-content .profile-detail{
+    margin-left: 30px;
+}
+
+.profile-content .profile-detail h1{
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 10px;
+}
+
+.profile-content .profile-detail h2{
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.profile-content .profile-detail span{
+    margin-bottom: 10px;}
+
+.profile-content .profile-detail .profile-diri{
+    display: flex;
+    flex-direction: column;
+    /* background-color: cornflowerblue; */
+    margin-bottom: 10px;
+    
+}
+.profile-content .profile-detail .profile-kontak{
+    display: flex;
+    flex-direction: column;
+    /* background-color: cornflowerblue; */
+    margin-bottom: 10px;
+    
+}
+
+.profile-content .profile-detail .profile-detailButton .profile-editButton{
+    background-color: rgba(33, 34, 33, 0.993);
+    font-weight: 600;
+    width: 100px;
+    color: rgb(255, 255, 255);
+}
+
+.profile-content .profile-detail .profile-detailButton .profile-editButton:active .profile-modal{
+    display: unset;
+}
+
+.profile-body .profile-modal{
+    background-color: rgb(184, 187, 180, 0.4);
+    height: 100%;
+    width: 100%;
+    position:fixed;
+    top: 0px;
+    left: 0px;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    display: none;
+    
+    
+}
+
+.profile-body .profile-modal .profile-modalContent{
+    margin-top: 20px;
+    background-color: rgb(184, 187, 180);
+    padding: 20px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    box-shadow: 0 0 30px 0 ;
+
+}
+
+.profile-body .profile-modal .profile-editForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-body .profile-modal h1{
+    font-size: larger;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.profile-body .profile-modal .profile-editForm label,input,select{
+    margin-bottom: 8px;
+}
+
+.profile-body .profile-modal .profile-editForm input,select{
+    border-radius: 8px;
+    height: 30px;
+    background-color: rgb(233, 232, 232);
+}
+
+.profile-body .profile-modal .profile-editForm .form-button{
+    /* background-color: aqua; */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+.profile-body .profile-modal .profile-editForm .form-button button{
+    /* background-color: aqua; */
+    width: 35%;
+    font-weight: 700;
+    color: rgb(233, 232, 232);
+}
+
+.profile-body .profile-modal .profile-editForm .form-button .profile-save{
+    background-color: rgb(6, 71, 17);
+}
+
+.profile-body .profile-modal .profile-editForm .form-button .profile-cancel{
+    background-color: rgb(124, 39, 39);
+}
+
+/* Responsive Breakpoint */
+
+@media  screen and (max-width:1024px) {
+    
+    .profile-body .profile-modal .profile-modalContent{
+        width: 40%;
+    }
+
+    .profile-body .profile-content .profile-image:hover img{
+        transition: none;
+        filter: none;
+    }
+
+    .profile-body .profile-content .profile-image:hover h5{
+        display: none;
+    }
+    
+
+
+}
+
+@media  screen and (max-width:700px){
+    .profile-body .profile-modal .profile-modalContent{
+        width: 70%;
+    }
+}
+
+@media  screen and (max-width:568px){
+
+    .profile-body .profile-content .profile-image{
+        width: 200px;
+        height: 250px;
+    }
+
+    .profile-content .profile-detail h1{
+        font-size: medium;
+    }
+    
+    .profile-content .profile-detail h2{
+        font-weight: 600;
+        font-size: small;
+    }
+
+    .profile-content .profile-detail span{
+        font-size: small;
+    }
+
+    .prfile-body .prfile-title img{
+        display: unset;
+    }
+
+    .profile-body .profile-modal .profile-modalContent{
+        width: 80%;
+        height: 200px;
+        overflow: scroll;
+    }
+
+    .profile-body .profile-modal .profile-editForm .form-button button{
+        width: 45%;
+    }
+
+
+}
+
+@media  screen and (max-width:430px){
+
+    .profile-body .profile-modal .profile-modalContent{
+        width: 80%;
+        height: fit-content;
+        overflow: hidden;
+    }
+
+    .profile-body .profile-modal .profile-editForm .form-button button{
+        width: 45%;
+    }
+
+    .profile-body .profile-modal .profile-modalContent{
+        width: 90%;
+    }
+
+    .profile-body .profile-content .profile-image{
+        width: 180px;
+        height: 200px;
+    }
+
+}
+

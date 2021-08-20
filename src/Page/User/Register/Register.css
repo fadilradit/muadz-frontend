@@ -1,0 +1,120 @@
+.register-body{
+    margin: 53px auto 0px ;
+    width: 85%;
+    height: 80vh;
+    padding: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    color: #585858;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* background-color: tomato; */
+
+}
+
+.register-body .register-logo{
+    /* background-color: violet; */
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.register-body .register-logo p{
+    font-size: x-large;
+}
+
+.register-body .register-logo img{
+    width: 75% ;
+}
+
+.register-body .register-form{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.register-body .register-form .register-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(221, 221, 221);
+    align-items: center;
+    width: 75%;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 ;
+
+}
+
+#register-card #register-formTitle{
+    margin-bottom: 15px;
+}
+
+.register-form #register-card #register-formTitle h1{
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.register-body .register-form .register-card button{
+    width: 40%;
+    margin-bottom: 5px;
+}
+
+.register-body .register-form .register-card .register-field{
+    border-radius: 8px;
+    height: 30px;
+    margin-bottom: 15px;
+    width: 70%;
+    background-color: aliceblue;
+}
+
+/* Responsive Breakpoint */
+
+@media screen and (max-width: 1040px ){
+    
+    .register-body .register-form .register-card{
+        width: 80%;
+    }
+
+}
+
+@media screen and (max-width: 980px ){
+
+    .register-body{
+        width: 90%;
+    }
+
+    .register-body .register-form .register-card{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 768px ){
+    .register-body{
+        flex-direction: column;
+    }
+
+    .register-body .register-logo{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .register-body .register-logo p{
+        font-size:large;
+    }
+
+    .register-body .register-form{
+        width: 100%;
+    }
+
+    .register-body .register-form .register-card .register-field{
+        width: 85%;
+    }
+
+    .register-body .register-form .register-card button{
+        width: 60%;
+    }
+
+}

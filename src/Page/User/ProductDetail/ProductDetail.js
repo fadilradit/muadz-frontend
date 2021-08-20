@@ -1,25 +1,18 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import Swal from 'sweetalert2'
 
-import {
-    Jumbotron,
-    Button,
-    Container,
-    Row,
-    Col,
-    Image
-} from 'react-bootstrap'
 
 import './ProductDetail.css'
 
-import Header from '../../../components/Header/Header'
 
 import koko1 from '../../../Image/koko.jpg'
 import koko2 from '../../../Image/koko2.jpg'
 import axios from '../../../config/axios';
 import CartLogo from '../../../Asset/CartLogo/Icon awesome-cart-plus.png'
 import ArrowBack from '../../../Asset/Arrow Icon/Icon awesome-arrow-left.png'
+import { result } from 'lodash'
 
 
 
@@ -84,7 +77,17 @@ class ProductDetail extends Component{
           {
             qty : totalQty
           }).then(res => {
-            alert('Quantity Sudah Ditambah')
+            // alert('Quantity Sudah Ditambah')
+            Swal.fire(
+              {
+                title: "Success",
+                text: "Jumlah Barang Dalam Keranjang Telah Ditambah",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+    
+              }
+            )
             
           })
         }else {
@@ -94,15 +97,40 @@ class ProductDetail extends Component{
             product_id: id,
             qty,
           }).then(res => {
-            alert('Product Berhasil Ditambahkan Kedalam Cart')
+            // alert('Product Berhasil Ditambahkan Kedalam Cart')
+            Swal.fire(
+              {
+                title: "Success",
+                text: "Product Sudah Ditambahkan Kedalam Keranjang",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+    
+              }
+            )
             
           })
         }
         
       })
     } if(user_id === ''){
-      alert("Anda Belum Login!!! Silahkan Login Untuk Melanjutkan")
-      this.setRedirect()
+      // alert("Anda Belum Login!!! Silahkan Login Untuk Melanjutkan")
+      Swal.fire({
+        toast: true,
+        title: "Anda Harus Login Terlebih Dahulu",
+        text: "Login untuk melanjutkan?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if(result.isConfirmed){
+          this.setRedirect()
+        }
+      })
+      
+      
 
      }
   }
@@ -149,6 +177,7 @@ class ProductDetail extends Component{
             </div>
 
           </div>
+          {this.renderRedirect()}
           </div>
           
           // <div>

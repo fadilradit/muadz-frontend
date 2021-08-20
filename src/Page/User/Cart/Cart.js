@@ -3,13 +3,16 @@ import {Jumbotron} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import Header from '../../../components/Header/Header'
 import './Cart.css'
 import PlusCounter from '../../../Asset/Plus Counter/Group 12.png'
 import MinCounter from '../../../Asset/Min Counter/Group 13.png'
 import DeleteIcon from '../../../Asset/Trash Icon/Icon feather-trash-2.png'
+import TrashIcon from '../../../Asset/Trash Icon/1.png'
 import ArrowBack from '../../../Asset/Arrow Icon/Icon awesome-arrow-left.png'
+import EmptyCart from '../../../Asset/Empty Cart/empty cart.png'
 
 class Cart extends Component{
 
@@ -60,10 +63,38 @@ class Cart extends Component{
                 console.log(res.data);
 
                 if(totalQty === 0){
-                    axios.delete('http://localhost:1993/cart/'+res.data[0].id)
-                    .then(res => {
-                        this.getCart()
-                    })
+
+                    Swal.fire({
+                        title: "Hapus?",
+                        text: "Anda Yakin Ingin Menghapus Product?",
+                        imageUrl: TrashIcon,
+                        imageWidth:60,
+                        imageHeight: 100,
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes'
+                      }).then((result) => {
+                        if(result.isConfirmed){
+                            axios.delete('http://localhost:1993/cart/'+res.data[0].id)
+                            .then(res => {
+                                this.getCart()
+                                Swal.fire(
+                                    {
+                                      title: "Success",
+                                      text: "Barang Berhasil Dihapus",
+                                      icon: "success",
+                                      showConfirmButton: false,
+                                      timer: 2000
+                          
+                                    }
+                                )
+                            })
+                        }
+                      })
+
+
+                    
                 }else{
                     axios.patch('http://localhost:1993/cart/'+res.data[0].id,
                     {
@@ -97,21 +128,47 @@ class Cart extends Component{
         const user_id = this.props.user.id
         const { product_id } = id
 
-        axios.get(
-            'http://localhost:1993/cart/'+user_id+'/'+product_id
-            ).then(res => {
-                axios.delete('http://localhost:1993/cart/'+res.data[0].id)
-                    .then(res => {
-                        this.getCart()
+        Swal.fire({
+            title: "Hapus?",
+            text: "Anda Yakin Ingin Menghapus Product?",
+            imageUrl: TrashIcon,
+            imageWidth:60,
+            imageHeight: 100,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if(result.isConfirmed){
+                axios.get(
+                    'http://localhost:1993/cart/'+user_id+'/'+product_id
+                    ).then(res => {
+                        axios.delete('http://localhost:1993/cart/'+res.data[0].id)
+                            .then(res => {
+                                this.getCart()
+                            })
                     })
-            })
+        
+        
+                axios.delete('http://localhost:1993/cart/'+id)
+                .then(res => {
+                    console.log(res.data);
+                    this.getCart()
+                    Swal.fire(
+                        {
+                          title: "Success",
+                          text: "Barang Berhasil Dihapus",
+                          icon: "success",
+                          showConfirmButton: false,
+                          timer: 2000
+              
+                        }
+                    )
+                })
+            }
+          })
 
-
-        axios.delete('http://localhost:1993/cart/'+id)
-        .then(res => {
-            console.log(res.data);
-            this.getCart()
-        })
+        
     }
 
     totalProduct = () => {
@@ -273,12 +330,10 @@ class Cart extends Component{
                 // </div>
             )
         }return (
-            <div>
-                <Header/>
-                <div className = "col-5 mt-5 mx-auto">
-                    <h4>Anda Belum Memiliki Product Yang Disimpan Ke Cart</h4>
-                    <Link to = "/" className = "btn btn-danger" >Ayo Belanja!!!</Link>
-                </div>
+            <div className = "cart-body2" id = "cart-body2" >
+                
+                <img src = {EmptyCart} />
+                <p>Keranjang Masih Kosong</p>
             </div>
         )
     }

@@ -15,12 +15,14 @@ DropdownButton,
 Dropdown,
 ToggleButton, 
 } from 'react-bootstrap'
+import Swal from 'sweetalert2'
 
 import {onLogoutUser} from '../../action/index'
 import {onLogoutAdmin} from '../../action/index'
 import './Header.css'
 
 import Logo from '../../Asset/Muadz.png'
+import { Redirect } from 'react-router-dom';
 
 const cookie = new cookies()
 class Header extends Component{
@@ -30,7 +32,8 @@ class Header extends Component{
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      login: true
     };
   }
 
@@ -40,8 +43,50 @@ class Header extends Component{
     });
   }
 
-  onButtonClick = () => {
-    this.props.onLogoutUser()
+  logoutCondition(){
+    const {login} = this.state
+    if(!login){
+      return <Redirect to = "/" />
+    }
+  }
+
+  logoutSet(){
+    this.setState({login: false})
+  }
+
+  onButtonClick = (e) => {
+    // this.props.onLogoutUser()
+    e.preventDefault()
+    this.navBarClose()
+
+    Swal.fire({
+      title: 'Keluar',
+      text: "Anda Yakin Untuk Keluar?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.setState({login: !this.state.login})
+        this.props.onLogoutUser()
+        
+        Swal.fire(
+          {
+            title: "Success",
+            text: "Anda Berhasil Keluar",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+
+          }
+        )
+      }
+    })
+    
+    
+    
   }
   onButtonClick2 = () => {
     this.props.onLogoutAdmin()
@@ -53,6 +98,12 @@ class Header extends Component{
     nav.classList.toggle('slide')
     
 
+}
+
+navBarClose = () => {
+  const nav = document.querySelector('ul')
+
+  nav.classList.remove('slide')
 }
 
 
@@ -71,7 +122,7 @@ class Header extends Component{
             <nav className = "header-body">
 
                 <div className = 'header-title'>
-                    <h1 >MUADZ</h1>
+                    <img src = {Logo} alt = 'Logo.png' />
                 </div>
                 
                 <ul className = 'navbar' >
@@ -133,6 +184,7 @@ class Header extends Component{
                     <span></span>
                     <span></span>
                 </div>
+                {this.logoutCondition()}
 
             </nav>
 

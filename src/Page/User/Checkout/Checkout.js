@@ -3,9 +3,12 @@ import {Jumbotron} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {Link, Redirect} from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import './Checkout.css'
 import ArrowBack from '../../../Asset/Arrow Icon/Icon awesome-arrow-left.png'
+import { result } from 'lodash'
+
 
 class Checkout extends Component{
 
@@ -99,14 +102,36 @@ class Checkout extends Component{
 
     onButtonClick = async () => {
         if (this.state.pending.length > 0) {
-            alert('Harap Bayar Transaksi Anda Sebelumnya Terlebih Dahulu')
-            this.setRedirect()
+            
+            Swal.fire({
+                title: "Sorry!",
+                text: "Harap Bayar Transaksi Anda Sebelumnya Terlebih Dahulu!",
+                icon: 'warning'
+            }).then((result) => {
+                if(result.isConfirmed){
+                    this.setRedirect()
+                }
+            })
         } else if (this.state.cancel.length > 0){
-            alert('Transaksi anda sebelumnya telah ditolak, silahkan upload ulang bukti pembayaran sebelumnya')
-            this.setRedirect()
+            Swal.fire({
+                title: "Sorry!",
+                text: 'Transaksi anda sebelumnya telah ditolak, silahkan upload ulang bukti pembayaran sebelumnya',
+                icon: 'warning'
+            }).then((result) => {
+                if(result.isConfirmed){
+                    this.setRedirect()
+                }
+            })
         } else if (this.state.paid.length > 0){
-            alert('Maaf Belanjaan Anda Sebelumnya Masih dalam Proses')
-            this.setRedirect()
+            Swal.fire({
+                title: "Sorry!",
+                text: 'Maaf Belanjaan Anda Sebelumnya Masih dalam Proses',
+                icon: 'warning'
+            }).then((result) => {
+                if(result.isConfirmed){
+                    this.setRedirect()
+                }
+            })
         }
         else{
         const customer_id = this.props.user.id
@@ -126,11 +151,28 @@ class Checkout extends Component{
         console.log(order_status);
 
         if(alamat === ''){
-            alert("Silahkan Lengkapi Data")
+            Swal.fire({
+                toast: true,
+                title: "Oopps!",
+                text: "Silahkan Lengkapi Data Anda",
+                icon: 'warning'
+            })
+
+
         }else if(bank === ''){
-            alert("Silahkan Pilih Bank Terlebih Dahulu")
+            Swal.fire({
+                toast: true,
+                title: "Oopps!",
+                text: "Silahkan Pilih Bank Terlebih Dahulu",
+                icon: 'warning'
+            })
         }else if(kurir === ''){
-            alert("Silahkan Pilih Jasa Kurir terlebih dahulu")
+            Swal.fire({
+                toast: true,
+                title: "Oopps!",
+                text: "Silahkan Pilih Jasa Pengiriman Terlebih dahulu",
+                icon: 'warning'
+            })
         }
         
         else{
@@ -161,8 +203,21 @@ class Checkout extends Component{
             `http://localhost:1993/hapuscart/${this.props.user.id}`)
             .then(res => {
                 console.log(res.data);
-                alert('Berhasil')
-                this.setRedirect()
+                Swal.fire({
+                    title: 'Berhasil',
+                    text: 'Silahkan Melakukan Pembayaran',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    icon: 'success'
+                    
+                  }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                      this.setRedirect()
+                    }else if(result.isConfirmed){
+                        this.setRedirect()
+                    }
+                  })
 
                 
             })

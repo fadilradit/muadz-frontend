@@ -183,6 +183,42 @@
 
 }
 
+.payment-body .payment-detail .payment-upload .payment-message{
+    /* background-color: aquamarine; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.payment-body .payment-detail .payment-upload .payment-message h1{
+    color: rgb(23, 23, 24);
+
+}
+
+.payment-body2{
+    margin: 53px auto 0px ;
+    /* background-color: blueviolet; */
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ;
+    color: #585858;
+
+}
+
+.payment-body2 img {
+    width: 10%;
+    margin: 5px;
+}
+
+.payment-body2 p{
+    font-size: medium;
+    font-weight:600;
+}
+
 /* Responsive Breakpoint */
 
 @media  screen and (max-width:1024px) {
